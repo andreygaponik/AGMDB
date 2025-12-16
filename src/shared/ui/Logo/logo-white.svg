@@ -1,0 +1,14 @@
+<svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <text
+    x="50%"
+    y="30"
+    font-family="Arial Black, Gadget, sans-serif"
+    font-size="40"
+    font-weight="900"
+    fill="white"
+    text-anchor="middle"
+    dominant-baseline="middle">
+    AGDB
+  </text>
+  <rect x="45" y="45" width="110" height="6" fill="yellow" />
+</svg>
