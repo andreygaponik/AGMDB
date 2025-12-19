@@ -6,6 +6,7 @@ import MainPage from "@/pages/Main/MainPage";
 import MoviesPage from "@/pages/Movies/MoviesPage";
 import SeriesPage from "@/pages/Series/SeriesPage";
 import WatchListPage from "@/pages/WatchList/WatchListPage";
+import RegisterPage from "@/pages/Register/RegisterPage";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
       { path: "/movies", element: <MoviesPage /> },
       { path: "/series", element: <SeriesPage /> },
       { path: "/watchlist", element: <WatchListPage /> },
+      { path: "/registration", element: <RegisterPage /> },
     ],
   },
 ]);

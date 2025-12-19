@@ -1,5 +1,5 @@
 import type { Movie } from "@/app/api/types";
-import { MovieItem } from "./MovieItem";
+import { MovieCard } from "./MovieCard";
 
 interface MovieListProps {
   title: string;
@@ -8,16 +8,15 @@ interface MovieListProps {
 
 export const MovieList = (props: MovieListProps) => {
   const { title, items } = props;
-  console.log(items);
 
   return (
-    <section className="movies-list">
+    <section className="movies-list mb-14">
       <div className="container">
-        <h2>{title}</h2>
+        <h2 className="text-2xl font-semibold mb-6">{title}</h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-14">
           {items.map((movie) => (
-            <MovieItem key={movie.kinopoiskId} movie={movie} />
+            <MovieCard key={movie.kinopoiskId} movie={movie} />
           ))}
         </div>
       </div>

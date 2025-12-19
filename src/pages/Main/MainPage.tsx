@@ -3,7 +3,9 @@ import { useTop250tvShows } from "@/features/movies/hooks/useTop250tvShows";
 import { useKidsAnimationTheme } from "@/features/movies/hooks/useKidsAnimationTheme";
 
 import type { Movie } from "@/app/api/types";
+
 import { MovieList } from "@/entities/movie/ui/MovieList";
+import { MovieListSkeleton } from "@/entities/movie/ui/MovieListSkeleton";
 
 const MainPage = () => {
   const { moviesData, moviesLoading, moviesError } = useTop250Movies(1);
@@ -12,7 +14,8 @@ const MainPage = () => {
     useKidsAnimationTheme(1);
 
   if (moviesLoading || tvShowsLoading || kidsAnimationLoading)
-    return <div>Загрузка...</div>;
+    return <MovieListSkeleton count={20} />;
+
   if (moviesError || tvShowsError || kidsAnimationError)
     return <div>Ошибка при загрузке</div>;
 
@@ -20,16 +23,10 @@ const MainPage = () => {
   const tvShows: Movie[] = tvShowsData?.items || [];
   const kidsAnimation: Movie[] = kidsAnimationData?.items || [];
 
-  console.log("movies", movies);
-  console.log("tvShows", tvShows);
-  console.log("kidsAnimation", kidsAnimation);
-
   return (
     <div className="mainPage">
       <MovieList title="Популярные фильмы" items={movies} />
-      <hr />
       <MovieList title="Популярные сериалы" items={tvShows} />
-      <hr />
       <MovieList title="Мультфильмы" items={kidsAnimation} />
     </div>
   );
