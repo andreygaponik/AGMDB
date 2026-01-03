@@ -6,12 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { FavoriteButton } from "./FavoriteButton";
 
-import {
-  favoritesApi,
-  useGetFavoritesQuery,
-  useAddFavoriteMutation,
-  useRemoveFavoriteMutation,
-} from "../api/favoritesApi";
+import { favoritesApi, useGetFavoritesQuery } from "../api/favoritesApi";
 import { authReducer } from "../../auth/model/authSlice";
 import { themeReducer } from "../../theme/themeSlice";
 import { kinopoiskapiunofficial } from "@/app/api/kinopoiskapiunofficial";
@@ -22,8 +17,6 @@ vi.mock("../api/favoritesApi", async (importActual) => {
   return {
     ...actual,
     useGetFavoritesQuery: vi.fn(),
-    useAddFavoriteMutation: vi.fn(() => [vi.fn()]),
-    useRemoveFavoriteMutation: vi.fn(() => [vi.fn()]),
   };
 });
 

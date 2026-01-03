@@ -10,6 +10,7 @@ import WatchListPage from "@/pages/WatchList/WatchListPage";
 import RegisterPage from "@/pages/Register/RegisterPage";
 import LoginPage from "@/pages/Login/Login";
 import MoviePage from "@/pages/Movie/MoviePage";
+import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/login", element: <LoginPage /> },
       { path: "/registration", element: <RegisterPage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
