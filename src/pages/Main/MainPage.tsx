@@ -17,7 +17,11 @@ const MainPage = () => {
     return <MovieListSkeleton count={20} />;
 
   if (moviesError || tvShowsError || kidsAnimationError)
-    return <div>Ошибка при загрузке</div>;
+    return (
+      <div className="container mt-10 text-center text-2xl">
+        <h1 className="text-white">Произошла ошибка при загрузке фильмов.</h1>
+      </div>
+    );
 
   const movies: Movie[] = moviesData?.items || [];
   const tvShows: Movie[] = tvShowsData?.items || [];

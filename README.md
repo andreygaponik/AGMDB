@@ -1,73 +1,149 @@
-# React + TypeScript + Vite
+# AGMDB - Movie Database
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Учебный проект SPA (Single Page Application), разработанный с использованием современных веб-технологий. Приложение представляет собой хаб для просмотра информации о фильмах и сериалах, с возможностью аутентификации пользователя и добавления контента в избранное.
 
-Currently, two official plugins are available:
+## Ключевые технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend:** React 19, TypeScript
+- **Сборка:** Vite
+- **Стилизация:** Tailwind CSS
+- **State Management:** Redux Toolkit, RTK Query
+- **Роутинг:** React Router v6
+- **Анимации:** Framer Motion
+- **БД и Аутентификация:** Firebase (Authentication, Firestore)
+- **Тестирование:** Vitest, React Testing Library
 
-## React Compiler
+## Инструкции по запуску
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+1.  **Настройка переменных окружения:**
+    Скопируйте файл `.env.example` и переименуйте копию в `.env`.
 
-## Expanding the ESLint configuration
+    Все необходимые ключи уже находятся в файле `.env.example`.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2.  **Установка зависимостей:**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    ```bash
+    npm install
+    ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3.  **Запуск в режиме разработки:**
+    Приложение будет доступно по адресу `http://localhost:5173`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+    ```bash
+    npm run dev
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+4.  **Сборка для production:**
+    Собранные и оптимизированные файлы проекта появятся в папке `dist`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    ```bash
+    npm run build
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+5.  **Запуск production-версии локально:**
+    Команда для предварительного просмотра собранного проекта.
+
+    ```bash
+    npm run preview
+    ```
+
+## Тестирование
+
+Проект покрыт unit-тестами с использованием **Vitest** и **React Testing Library**.
+
+#### Запуск тестов
+
+- Для запуска всех тестов в консоли:
+  ```bash
+  npm test
+  ```
+- Для запуска в интерактивном UI-режиме:
+  ```bash
+  npm run test:ui
+  ```
+
+#### Что протестировано
+
+На данный момент тестами покрыта значительная часть переиспользуемых компонентов и страниц, включая:
+
+- **Простые UI-компоненты:** `Pagination`, `Logo`, `ThemeToggle`.
+- **Компоненты с логикой:** `MovieCard` (отображение и ссылки).
+- **Компоненты, подключенные к Redux:** `FavoriteButton` (логика отображения состояний).
+- **Компоненты-страницы:** `MoviesPage` (проверка состояний загрузки, ошибки и успеха).
+
+#### Известные проблемы и ограничения в тестировании
+
+В процессе написания тестов была выявлена сложная проблема с совместимостью типов в тестовом окружении Vitest.
+
+При попытке сконфигурировать тестовый Redux Store, который включает в себя несколько API-слоев RTK Query, созданных с разными `baseQuery` (`fetchBaseQuery` для API Кинопоиска и `fakeBaseQuery` для API Firebase), возникает неразрешимый конфликт типов TypeScript.
+
+## Структура проекта (Feature-Sliced Design)
+
+Проект следует архитектуре **Feature-Sliced Design (FSD)**.
+
+- `src/app` — **Слой приложения.**
+  Здесь находятся глобальные настройки, стили, провайдеры (например, `AuthProvider`), конфигурация `store` и главный роутер. Это ядро, которое запускает все приложение.
+
+- `src/pages` — **Слой страниц.**
+  Каждая папка здесь — это отдельная страница приложения (например, `MainPage`, `MoviePage`, `LoginPage`). Этот слой отвечает за композицию виджетов и сущностей для формирования полноценной страницы.
+
+- `src/widgets` — **Слой виджетов.**
+  Это самостоятельные, крупные блоки интерфейса, такие как `Header` или `Footer`. Они собираются из более мелких частей (`features` и `entities`).
+
+- `src/features` — **Слой фич (функциональности).**
+  Здесь находится логика, которую пользователь может инициировать: `auth` (логика аутентификации), `favorites` (добавление в избранное), `theme` (переключение темы). Кажда фича имеет свою внутреннюю структуру (UI, model, api).
+
+- `src/entities` — **Слой сущностей.**
+  Это бизнес-сущности, такие как `movie` (фильм). Здесь лежат компоненты, которые представляют эти сущности (`MovieCard`, `MovieList`) и не содержат сложной бизнес-логики.
+
+- `src/shared` — **Слой переиспользуемого кода.**
+  Самый нижний слой, содержащий универсальные компоненты (`Logo`, `Pagination`), хуки (`useDebounce`) и утилиты, которые могут использоваться где угодно в приложении.
+
+## Ниже я привожу пояснения по выполненным критериям в проекте.
+
+1.  Динамичность веб-страниц
+
+Интерфейс активно реагирует на действия пользователя. Например:
+
+- В шапке сайта (src/widgets/Header) отображаются разные элементы в зависимости от статуса аутентификации пользователя.
+- При клике на иконку сердца (src/features/favorites/ui/FavoriteButton.tsx) она мгновенно меняет свой вид (закрашенная/пустая), а счетчик в шапке обновляется.
+- Реализовано переключение темы (светлая/темная), которое изменяет цвета элементов, например, цвет иконки "сердце".
+
+2.  Производительность отрисовки
+
+- На главной странице (src/pages/Main/MainPage.tsx) одновременно отображаются три списка фильмов, суммарное количество которых превышает 50, а также на странице "Фильмы" (src/pages/Movies/MoviesPage.tsx) реализован вывод большого списка элементов с пагинацией. Помимо этого можно добавить нужное кол-во фильмов в избранное и проверить отрисовку на странице /watchlist
+
+- На странице "Избранное" (src/pages/WatchList/WatchListPage.tsx) используется анимация при удалении элемента из списка (framer-motion), что обеспечивает плавность и бесшовность интерфейса.
+
+- Во время загрузки данных отображаются компоненты-скелетоны (src/entities/movie/ui/MovieListSkeleton.tsx), что улучшает пользовательский опыт.
+
+3.  Навигация в приложении
+
+- Проект является полноценным SPA, построенным на react-router-dom, что гарантирует корректную работу кнопок браузера "вперёд", "назад" и "обновить".
+- Реализован постраничный просмотр списка фильмов (src/pages/Movies/MoviesPage.tsx), при этом номер текущей страницы хранится в URL (?page=...), что позволяет делиться ссылками
+  на конкретную страницу.
+
+4.  Кроссбраузерность
+
+- Верстка проекта полностью адаптивна. Использован фреймворк Tailwind CSS с его системой брейкпоинтов для корректного отображения на экранах разной ширины, от мобильных до
+  десктопных. Это можно увидеть на примере сетки фильмов и карточек, которые меняют свои размеры и количество в ряду.
+
+5.  Коммуникации
+
+- Проект широко использует AJAX для взаимодействия с внешними API через RTK Query (src/app/api/kinopoiskapiunofficial.ts) для получения данных о фильмах.
+- Реализовано сохранение данных пользователя (списка избранных фильмов) с использованием Firebase Firestore (src/features/favorites/api/favoritesApi.ts).
+- Во время асинхронных запросов отображаются индикаторы прогресса (скелетоны).
+
+6.  Модель данных
+
+- В качестве централизованного хранилища данных используется Redux Toolkit (src/app/store.ts). Через него управляется как состояние аутентификации пользователя, так и
+  кэширование данных, полученных от API, с помощью RTK Query.
+
+7.  Сборка проекта
+
+- Проект построен на базе Vite. Сборка полностью автоматизирована. Команда npm run dev запускает dev-сервер с HMR (hot module replacement), а npm run build создает
+  оптимизированную production-сборку проекта в папке dist.
+
+8.  Тесты
+
+Проект покрыт unit-тестами. Протестированы как простые UI-компоненты, так и сложные компоненты, взаимодействующие с Redux.

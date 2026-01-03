@@ -1,6 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
+[data-theme="light"] body {
+  background-color: #fff;
+  color: #000;
+}
+
+[data-theme="dark"] body {
+  background-color: #14161a;
+  color: #fff;
+}
+[data-theme="light"] .rating {
+  color: #fff;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;

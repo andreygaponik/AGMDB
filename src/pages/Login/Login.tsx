@@ -1,17 +1,18 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RegisterForm } from "@/features/auth/ui/RegisterForm";
+
+import { LoginForm } from "@/features/auth/ui/LoginForm";
 
 import type { RootState } from "@/app/store";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
 
   if (user) {
     return <Navigate to="/" replace />;
   }
 
-  return <RegisterForm />;
+  return <LoginForm />;
 };
 
-export default RegisterPage;
+export default LoginPage;

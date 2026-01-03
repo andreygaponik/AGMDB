@@ -1,0 +1,14 @@
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Основные буквы -->
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Poppins, sans-serif" font-size="60" font-weight="700" fill="white">
+    AGMDB
+  </text>
+
+  <!-- Лёгкий акцент на букву M -->
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Poppins, sans-serif" font-size="60" font-weight="700" fill="white" opacity="0.2" transform="scale(1.1,1)">
+    M
+  </text>
+
+  <!-- Динамическая линия под текстом -->
+  <path d="M0 70 C100 100, 300 0, 400 70" stroke="white" stroke-width="2" fill="transparent" stroke-linecap="round"></path>
+</svg>

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import type { MoviesResponse } from "./types";
+import type { Movie, MoviesResponse } from "./types";
 
 const API_TOKEN = import.meta.env.VITE_KINOPOISK_API_KEY;
 
@@ -44,6 +44,10 @@ export const kinopoiskapiunofficial = createApi({
         },
       }),
     }),
+
+    getMovieById: builder.query<Movie, string>({
+      query: (id) => id,
+    }),
   }),
 });
 
@@ -51,4 +55,5 @@ export const {
   useGetTop250MoviesQuery,
   useGetTop250tvShowsQuery,
   useGetKidsAnimationThemeQuery,
+  useGetMovieByIdQuery,
 } = kinopoiskapiunofficial;

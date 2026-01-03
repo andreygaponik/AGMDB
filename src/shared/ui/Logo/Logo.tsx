@@ -1,9 +1,7 @@
-import logoWhite from './logo-white.svg';
+import logo from "./logo.svg";
 
 const Logo = () => {
-  return (
-    <img src={logoWhite} alt="AGDB" className='max-w-50' />
-  )
-}
+  return <img src={logo} alt="AGMDB" className="w-54" />;
+};
 
 export default Logo;
