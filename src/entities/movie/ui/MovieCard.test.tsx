@@ -3,9 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
-
 import { MovieCard } from "./MovieCard";
-// Импортируем все необходимое для store, как в прошлый раз
 import { kinopoiskapiunofficial } from "@/app/api/kinopoiskapiunofficial";
 import {
   favoritesApi,
