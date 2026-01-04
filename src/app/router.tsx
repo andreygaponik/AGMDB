@@ -12,26 +12,28 @@ import LoginPage from "@/pages/Login/Login";
 import MoviePage from "@/pages/Movie/MoviePage";
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 
-export const router = createBrowserRouter([
-  {
-    element: <MainLayout />,
-    children: [
-      { path: "/", element: <MainPage /> },
-      { path: "/movies", element: <MoviesPage /> },
-      { path: "/series", element: <SeriesPage /> },
-      { path: "/watchlist", element: <WatchListPage /> },
-      { path: "/movie/:id", element: <MoviePage /> },
-      { path: "*", element: <NotFoundPage /> },
-    ],
-  },
-  {
-    element: <AuthLayout />,
-    children: [
-      { path: "/login", element: <LoginPage /> },
-      { path: "/registration", element: <RegisterPage /> },
-    ],
-  },
+export const router = createBrowserRouter(
+  [
+    {
+      element: <MainLayout />,
+      children: [
+        { path: "/", element: <MainPage /> },
+        { path: "/movies", element: <MoviesPage /> },
+        { path: "/series", element: <SeriesPage /> },
+        { path: "/watchlist", element: <WatchListPage /> },
+        { path: "/movie/:id", element: <MoviePage /> },
+        { path: "*", element: <NotFoundPage /> },
+      ],
+    },
+    {
+      element: <AuthLayout />,
+      children: [
+        { path: "/login", element: <LoginPage /> },
+        { path: "/registration", element: <RegisterPage /> },
+      ],
+    },
+  ],
   {
     basename: import.meta.env.BASE_URL,
   },
-]);
+);
