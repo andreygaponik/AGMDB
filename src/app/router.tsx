@@ -21,6 +21,7 @@ export const router = createBrowserRouter([
       { path: "/series", element: <SeriesPage /> },
       { path: "/watchlist", element: <WatchListPage /> },
       { path: "/movie/:id", element: <MoviePage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
   {
@@ -28,7 +29,9 @@ export const router = createBrowserRouter([
     children: [
       { path: "/login", element: <LoginPage /> },
       { path: "/registration", element: <RegisterPage /> },
-      { path: "*", element: <NotFoundPage /> },
     ],
+  },
+  {
+    basename: import.meta.env.BASE_URL,
   },
 ]);
